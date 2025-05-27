@@ -119,40 +119,44 @@ const App = () => {
         <ul className="space-y-2">
           <AnimatePresence>
             {filteredTodos.map((todo) => (
-              <motion.li
-                key={todo.id}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                variants={variants}
-                transition={{ duration: 0.2 }}
-                className={`flex justify-between items-center p-3 rounded shadow ${
-                  darkMode ? "bg-gray-800" : "bg-white"
-                }`}
-              >
-                <span
-                  onClick={() => toggleComplete(todo.id)}
-                  className={`cursor-pointer flex-1 text-sm sm:text-base ${
-                    todo.completed ? "line-through text-gray-400" : ""
-                  }`}
-                >
-                  {todo.text}
-                </span>
-                <div className="flex gap-2 ml-3 text-sm">
-                  <button
-                    onClick={() => startEdit(todo.id, todo.text)}
-                    className="text-green-500 hover:underline"
-                  >
-                    Edit
-                  </button>
-                  <button
-                    onClick={() => deleteTodo(todo.id)}
-                    className="text-red-500 hover:underline"
-                  >
-                    Delete
-                  </button>
-                </div>
-              </motion.li>
+           <motion.li
+  key={todo.id}
+  initial="hidden"
+  animate="visible"
+  exit="exit"
+  variants={variants}
+  transition={{ duration: 0.2 }}
+  className={`flex justify-between items-center p-3 rounded shadow ${
+    darkMode ? "bg-gray-800" : "bg-white"
+  }`}
+>
+  <div 
+    onClick={() => toggleComplete(todo.id)}
+    className={`cursor-pointer flex-1 text-sm sm:text-base ${
+      todo.completed ? "line-through text-gray-400" : ""
+    }`}
+  >
+    {todo.text}
+    <div className="text-xs text-gray-500 mt-1">
+      {new Date(todo.createdAt).toLocaleString()}
+    </div>
+  </div>
+  <div className="flex gap-2 ml-3 text-sm">
+    <button
+      onClick={() => startEdit(todo.id, todo.text)}
+      className="text-green-500 hover:underline"
+    >
+      Edit
+    </button>
+    <button
+      onClick={() => deleteTodo(todo.id)}
+      className="text-red-500 hover:underline"
+    >
+      Delete
+    </button>
+  </div>
+</motion.li>
+
             ))}
           </AnimatePresence>
         </ul>
